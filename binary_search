@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int binarySearch(int arr[], int size, int target) {
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        // target을 찾은 경우
+        if (arr[mid] == target) {
+            return mid;
+        }
+
+        // target이 중간값보다 큰 경우
+        if (arr[mid] < target) {
+            low = mid + 1;
+        } 
+        // target이 중간값보다 작은 경우
+        else {
+            high = mid - 1;
+        }
+    }
+
+    // target이 배열에 없는 경우
+    return -1;
+}
+
+int main() {
+    int arr[] = {2, 3, 4, 10, 40};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int target = 10;
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1) {
+        printf("값 %d은 인덱스 %d에 존재합니다.\n", target, result);
+    } else {
+        printf("값 %d은 배열에 존재하지 않습니다.\n", target);
+    }
+
+    return 0;
+}
